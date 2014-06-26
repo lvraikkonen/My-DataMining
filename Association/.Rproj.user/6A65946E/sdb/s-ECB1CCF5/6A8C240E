@@ -1,0 +1,16 @@
+{
+    "contents" : "利用apriori算法进行关联分析\n==========================\n\n\n## 载入相关R扩展包\n`arules`\n\n```r\nlibrary(arules)\nlibrary(rattle)## data\n```\n\n## Sample Data\nID: 购物篮编号\nItem: 物品\n\n```r\n#从rattle包中读入数据\ndvdtrans <- read.csv(system.file(\"csv\", \"dvdtrans.csv\",package=\"rattle\"))\nhead(dvdtrans)\n```\n\n```\n##   ID          Item\n## 1  1   Sixth Sense\n## 2  1         LOTR1\n## 3  1 Harry Potter1\n## 4  1    Green Mile\n## 5  1         LOTR2\n## 6  2     Gladiator\n```\n\n## 利用`Apriori`算法进行关联分析\n\n```r\n#将数据转化为合适的格式\ndata <- as(split(dvdtrans$Item, dvdtrans$ID),\"transactions\")\n\n#用 apriori命令生成频繁项集，设其支持度为0.5，置信度为0.8\nrules <- apriori(data, parameter=list(support=0.5,confidence=0.8))\n```\n\n```\n## \n## parameter specification:\n##  confidence minval smax arem  aval originalSupport support minlen maxlen\n##         0.8    0.1    1 none FALSE            TRUE     0.5      1     10\n##  target   ext\n##   rules FALSE\n## \n## algorithmic control:\n##  filter tree heap memopt load sort verbose\n##     0.1 TRUE TRUE  FALSE TRUE    2    TRUE\n## \n## apriori - find association rules with the apriori algorithm\n## version 4.21 (2004.05.09)        (c) 1996-2004   Christian Borgelt\n## set item appearances ...[0 item(s)] done [0.00s].\n## set transactions ...[10 item(s), 10 transaction(s)] done [0.00s].\n## sorting and recoding items ... [3 item(s)] done [0.00s].\n## creating transaction tree ... done [0.00s].\n## checking subsets of size 1 2 done [0.00s].\n## writing ... [3 rule(s)] done [0.00s].\n## creating S4 object  ... done [0.00s].\n```\n\n```r\n#用inspect命令提取规则\ninspect(rules)\n```\n\n```\n##   lhs              rhs         support confidence  lift\n## 1 {Patriot}     => {Gladiator}     0.6     1.0000 1.429\n## 2 {Gladiator}   => {Patriot}       0.6     0.8571 1.429\n## 3 {Sixth Sense} => {Gladiator}     0.5     0.8333 1.190\n```\n\n## 结论\n这说明购买爱国者电影(`Patriot`)的顾客同时也会购买角斗士(`Gladiator`)\n",
+    "created" : 1403752484490.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4136013580",
+    "id" : "6A8C240E",
+    "lastKnownWriteTime" : 1403752478,
+    "path" : "~/GitHub/My-DataMining/Association/AssociationAnalysis_Apriori.md",
+    "project_path" : "AssociationAnalysis_Apriori.md",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "markdown"
+}

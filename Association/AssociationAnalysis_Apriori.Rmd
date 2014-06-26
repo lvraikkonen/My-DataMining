@@ -1,0 +1,34 @@
+利用apriori算法进行关联分析
+==========================
+
+
+## 载入相关R扩展包
+`arules`
+```{r}
+library(arules)
+library(rattle)## data
+```
+
+## Sample Data
+ID: 购物篮编号
+Item: 物品
+```{r}
+#从rattle包中读入数据
+dvdtrans <- read.csv(system.file("csv", "dvdtrans.csv",package="rattle"))
+head(dvdtrans)
+```
+
+## 利用`Apriori`算法进行关联分析
+```{r}
+#将数据转化为合适的格式
+data <- as(split(dvdtrans$Item, dvdtrans$ID),"transactions")
+
+#用 apriori命令生成频繁项集，设其支持度为0.5，置信度为0.8
+rules <- apriori(data, parameter=list(support=0.5,confidence=0.8))
+
+#用inspect命令提取规则
+inspect(rules)
+```
+
+## 结论
+这说明购买爱国者电影(`Patriot`)的顾客同时也会购买角斗士(`Gladiator`)

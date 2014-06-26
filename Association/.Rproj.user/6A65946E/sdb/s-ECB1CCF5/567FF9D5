@@ -1,0 +1,17 @@
+{
+    "contents" : "利用apriori算法进行关联分析\n==========================\n\n\n## 载入相关R扩展包\n`arules`\n```{r}\nlibrary(arules)\nlibrary(rattle)## data\n```\n\n## Sample Data\nID: 购物篮编号\nItem: 物品\n```{r}\n#从rattle包中读入数据\ndvdtrans <- read.csv(system.file(\"csv\", \"dvdtrans.csv\",package=\"rattle\"))\nhead(dvdtrans)\n```\n\n## 利用`Apriori`算法进行关联分析\n```{r}\n#将数据转化为合适的格式\ndata <- as(split(dvdtrans$Item, dvdtrans$ID),\"transactions\")\n\n#用 apriori命令生成频繁项集，设其支持度为0.5，置信度为0.8\nrules <- apriori(data, parameter=list(support=0.5,confidence=0.8))\n\n#用inspect命令提取规则\ninspect(rules)\n```\n\n## 结论\n这说明购买爱国者电影(`Patriot`)的顾客同时也会购买角斗士(`Gladiator`)",
+    "created" : 1403752403272.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "763580790",
+    "id" : "567FF9D5",
+    "lastKnownWriteTime" : 1403752455,
+    "path" : "~/GitHub/My-DataMining/Association/AssociationAnalysis_Apriori.Rmd",
+    "project_path" : "AssociationAnalysis_Apriori.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}

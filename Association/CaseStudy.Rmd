@@ -1,0 +1,92 @@
+关联分析挖掘购买行为的关联性
+========================================================
+
+## 关联分析的基本概念
+### 项集
+
+### 关联规则
+记为`X->Y`的形式，称关联规则左侧的项集X为先决条件，右侧项集Y为相应的关联结果
+
+### 评价关联性强弱
+- 支持度(`Support`)
+- 置信度(`Confidence`)
+- 提升度(`Lift`)
+
+## 关联分析基本算法步骤
+1. 选出满足支持度最小阈值的所有项集，即`频繁项集`
+2. 从频繁项集中找出满足最小置信度的所有规则
+
+## 相关算法 `Apriori`和`Eclat`
+
+R实现
+=========================================
+
+加载相应软件包`arules`
+```{r load related packages}
+## install.packages("arules")
+library(arules)
+```
+
+案例数据集
+```{r sample dataset}
+data("Groceries")
+summary(Groceries)
+
+inspect(Groceries[1:10])
+```
+
+支持度最小阈值设为0.01
+置信度最小阈值设为0.5
+```{r Default Rule}
+rules0 <- apriori(data = Groceries,
+                  parameter = list(support = 0.001,
+                                   confidence = 0.5))
+rules0 ##显示rules0中生成关联规则条数
+```
+
+## 动态调整阈值生成规则
+支持度置信度控制
+```{r}
+rules1 <- apriori(data = Groceries,
+                  parameter = list(support = 0.005,
+                                   confidence = 0.5))
+rules1
+```
+
+支持度(置信度，提升度)控制
+```{r}
+rules.sorted_sup <- sort(rules0, by = "support") ## 按支持度排序
+inspect(rules.sorted_sup[1:5]) ##Top 5关联规则
+```
+
+
+## 关联规则可视化
+可视化包`arulesViz`
+```{r Visual Lib}
+## install.packages("arulesViz")
+library(arulesViz)
+```
+
+Sample
+```{r Sample Plot}
+rules5 <- apriori(Groceries, parameter=list(support=0.002,
+                                            confidence=0.5))
+rules5
+plot(rules5)
+## plot(rules5, interactive=TRUE) ## 互动散点图
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

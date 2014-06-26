@@ -1,0 +1,17 @@
+{
+    "contents" : "关联分析挖掘购买行为的关联性\n========================================================\n\n## 关联分析的基本概念\n### 项集\n\n### 关联规则\n记为`X->Y`的形式，称关联规则左侧的项集X为先决条件，右侧项集Y为相应的关联结果\n\n### 评价关联性强弱\n- 支持度(`Support`)\n- 置信度(`Confidence`)\n- 提升度(`Lift`)\n\n## 关联分析基本算法步骤\n1. 选出满足支持度最小阈值的所有项集，即`频繁项集`\n2. 从频繁项集中找出满足最小置信度的所有规则\n\n## 相关算法 `Apriori`和`Eclat`\n\nR实现\n=========================================\n\n加载相应软件包`arules`\n```{r load related packages}\n## install.packages(\"arules\")\nlibrary(arules)\n```\n\n案例数据集\n```{r sample dataset}\ndata(\"Groceries\")\nsummary(Groceries)\n\ninspect(Groceries[1:10])\n```\n\n支持度最小阈值设为0.01\n置信度最小阈值设为0.5\n```{r Default Rule}\nrules0 <- apriori(data = Groceries,\n                  parameter = list(support = 0.001,\n                                   confidence = 0.5))\nrules0 ##显示rules0中生成关联规则条数\n```\n\n## 动态调整阈值生成规则\n支持度置信度控制\n```{r}\nrules1 <- apriori(data = Groceries,\n                  parameter = list(support = 0.005,\n                                   confidence = 0.5))\nrules1\n```\n\n支持度(置信度，提升度)控制\n```{r}\nrules.sorted_sup <- sort(rules0, by = \"support\") ## 按支持度排序\ninspect(rules.sorted_sup[1:5]) ##Top 5关联规则\n```\n\n\n## 关联规则可视化\n可视化包`arulesViz`\n```{r Visual Lib}\n## install.packages(\"arulesViz\")\nlibrary(arulesViz)\n```\n\nSample\n```{r Sample Plot}\nrules5 <- apriori(Groceries, parameter=list(support=0.002,\n                                            confidence=0.5))\nrules5\nplot(rules5)\n## plot(rules5, interactive=TRUE) ## 互动散点图\n```\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+    "created" : 1403769318034.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "946776085",
+    "id" : "77F9F922",
+    "lastKnownWriteTime" : 1403771736,
+    "path" : "~/GitHub/My-DataMining/Association/CaseStudy.Rmd",
+    "project_path" : "CaseStudy.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}

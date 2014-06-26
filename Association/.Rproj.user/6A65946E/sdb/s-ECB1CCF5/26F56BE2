@@ -1,0 +1,17 @@
+{
+    "contents" : "install.packages(\"arules\")\nlibrary(arules)\n\ndata(\"Groceries\")\ninspect (Groceries[1:10])\n\n## Apriori Algrithum\nrules0 <- apriori(data = Groceries,\n                  parameter = list(support = 0.001,\n                                   confidence = 0.5))\nrules0\n\n## Change params\nrules1 <- apriori(data = Groceries,\n                  parameter = list(support = 0.005,\n                                   confidence = 0.5))\nrules1\n\nrules2 <- apriori(data = Groceries,\n                  parameter = list(support = 0.005,\n                                   confidence = 0.6))\nrules2\n\nrules3 <- apriori(data = Groceries,\n                  parameter = list(support = 0.005,\n                                   confidence = 0.64))\nrules3\n\n## change params by one\nrules.sorted_sup <- sort(rules0, by = \"support\")\n\n\n##\nrules4 <- apriori(data = Groceries,\n                  parameter = list(maxlen=2,supp=0.001,conf=0.1),\n                  appearance = list(rhs=\"mustard\",default=\"lhs\"))\nrules4\n\n",
+    "created" : 1403770483900.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "660311247",
+    "id" : "26F56BE2",
+    "lastKnownWriteTime" : 1403679951,
+    "path" : "~/GitHub/My-DataMining/Association/CaseStudy.R",
+    "project_path" : "CaseStudy.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

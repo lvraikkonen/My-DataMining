@@ -54,13 +54,13 @@ rules <- apriori(data, parameter=list(support=0.5,confidence=0.8))
 ## 
 ## apriori - find association rules with the apriori algorithm
 ## version 4.21 (2004.05.09)        (c) 1996-2004   Christian Borgelt
-## set item appearances ...[0 item(s)] done [0.00s].
+## set item appearances ...[0 item(s)] done [0.02s].
 ## set transactions ...[10 item(s), 10 transaction(s)] done [0.00s].
 ## sorting and recoding items ... [3 item(s)] done [0.00s].
 ## creating transaction tree ... done [0.00s].
 ## checking subsets of size 1 2 done [0.00s].
-## writing ... [3 rule(s)] done [0.00s].
-## creating S4 object  ... done [0.00s].
+## writing ... [3 rule(s)] done [0.02s].
+## creating S4 object  ... done [0.03s].
 ```
 
 ```r

@@ -4,7 +4,7 @@
 
 ## 载入相关R扩展包
 `arules`
-```{r}
+```{r load_library}
 library(arules)
 library(rattle)## data
 ```

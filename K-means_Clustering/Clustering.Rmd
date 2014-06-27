@@ -1,0 +1,9 @@
+Clustering 聚类分析
+==============================
+
+## 常见5种聚类分析算法
+- K-均值聚类(K-means)
+- K-中心点聚类(K-Medoids)
+- 密度聚类(DBSCAN)
+- 系谱聚类(Hierarchical Clustering, HC)
+- 期望最大化聚类(EM)

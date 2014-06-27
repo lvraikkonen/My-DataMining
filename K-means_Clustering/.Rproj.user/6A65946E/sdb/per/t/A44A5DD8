@@ -1,0 +1,17 @@
+{
+    "contents" : "K-means 聚类分析\n==============================\n\n- 优点：适合处理分布集中的大样本数据集\n- 缺点：对异常值或极值敏感，稳定性差\n\n## 步骤\n\n## R中实现\n\n### 相关软件包\n- ``stats`\n- `cluster`\n- `fpc`\n- `mclust`\n\n## K-means算法核心函数`kmeans()`\n在`stats`软件包",
+    "created" : 1403852993780.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2133422043",
+    "id" : "A44A5DD8",
+    "lastKnownWriteTime" : 1403854096,
+    "path" : "~/GitHub/My-DataMining/K-means_Clustering/K-means_Study.Rmd",
+    "project_path" : "K-means_Study.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}

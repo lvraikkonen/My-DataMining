@@ -1,0 +1,17 @@
+{
+    "contents" : "# import data\nx <- read.csv(\"country_data.csv\", header=TRUE, row.names=1)\n\n# run K-Means (3groups)\nkm <- kmeans(x, 3, 15)\n\n# print components of km\nprint(km)\n\n# plot clusters\nplot(x, col = km$cluster)\n# plot centers\npoints(km$centers, col = 1:2, pch = 8)\n",
+    "created" : 1403852961190.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3320823211",
+    "id" : "AC582E06",
+    "lastKnownWriteTime" : 1400827719,
+    "path" : "~/GitHub/My-DataMining/K-means_Clustering/country_level.R",
+    "project_path" : "country_level.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}

@@ -1,0 +1,48 @@
+Connect twitter use API
+========================================================
+
+related package: ``
+
+```{r}
+## load related packages for OAuth API
+library(httr)
+library(httpuv)
+library(jsonlite)
+
+```
+
+Set OAuth settings
+```{r Set OAuth settings}
+# 1. Find OAuth settings for twitter
+oauth_endpoints("twitter")
+
+
+# 2. Register an application at https://github.com/settings/applications
+# Insert your values below - if secret is omitted, it will look it up in the
+# GITHUB_CONSUMER_SECRET environmental variable.  Use http://localhost:1410
+# as the callback url
+myapp <- oauth_app("ContentMining", key = "an3hwBQXNU7xwZmz3ISTHHryI",
+                   secret = "I5pMQT5Hlh7G3zHhIBmmTC2f0AKCrJKBem69eTygwpfRu9hNBj")
+
+
+# 3. Get OAuth credentials
+twitter_token <- oauth2.0_token(oauth_endpoints("twitter"), myapp)
+
+```
+
+```{r}
+
+
+
+
+```
+
+
+
+```{r tm 分词}
+library(Rwordseg)
+
+teststring1 <- "或是当事人在第一时间出来辟谣，已远远不能满足如今网络信息传播的速度，而虚假的信息往往给政府、企业、及知名人士带来负面的影响，如金庸去世，到近期所谓铁观音迷魂抢劫引发网民恐慌."
+segmentCN(teststring1)
+```
+

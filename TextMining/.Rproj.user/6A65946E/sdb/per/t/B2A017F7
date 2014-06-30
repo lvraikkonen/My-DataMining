@@ -1,0 +1,17 @@
+{
+    "contents" : "Connect twitter use API\n========================================================\n\nrelated package: ``\n\n```{r}\n## load related packages for OAuth API\nlibrary(httr)\nlibrary(httpuv)\nlibrary(jsonlite)\n\n```\n\nSet OAuth settings\n```{r Set OAuth settings}\n# 1. Find OAuth settings for twitter\noauth_endpoints(\"twitter\")\n\n\n# 2. Register an application at https://github.com/settings/applications\n# Insert your values below - if secret is omitted, it will look it up in the\n# GITHUB_CONSUMER_SECRET environmental variable.  Use http://localhost:1410\n# as the callback url\nmyapp <- oauth_app(\"ContentMining\", key = \"an3hwBQXNU7xwZmz3ISTHHryI\",\n                   secret = \"I5pMQT5Hlh7G3zHhIBmmTC2f0AKCrJKBem69eTygwpfRu9hNBj\")\n\n\n# 3. Get OAuth credentials\ntwitter_token <- oauth2.0_token(oauth_endpoints(\"twitter\"), myapp)\n\n```\n\n```{r}\n\n\n\n\n```\n\n\n\n```{r tm 分词}\nlibrary(Rwordseg)\n\nteststring1 <- \"或是当事人在第一时间出来辟谣，已远远不能满足如今网络信息传播的速度，而虚假的信息往往给政府、企业、及知名人士带来负面的影响，如金庸去世，到近期所谓铁观音迷魂抢劫引发网民恐慌.\"\nsegmentCN(teststring1)\n```\n\n",
+    "created" : 1404112732703.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1015084238",
+    "id" : "B2A017F7",
+    "lastKnownWriteTime" : 1404123887,
+    "path" : "~/GitHub/My-DataMining/TextMining/GetData.Rmd",
+    "project_path" : "GetData.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}

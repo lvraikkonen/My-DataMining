@@ -1,0 +1,17 @@
+{
+    "contents" : "LDA Topic Model\n========================================================\n\n## Step 1: Install RTextTools + topicmodels\nWe begin by installing and loading RTextTools and the topicmodels package into our R workspace.\n\n```{r}\n## install.packages(c(\"RTextTools\",\"topicmodels\"))\nlibrary(tm)\nlibrary(RTextTools)\nlibrary(topicmodels)\n```\n\n\n## Step 2: Load the Data\nIn this example, we will be using the bundled NYTimes dataset compiled by Amber E. Boydstun. This dataset contains headlines from front-page NYTimes articles. We will take a random sample of 1000 articles for the purposes of this tutorial.\n\n```{r}\ndata(NYTimes)\ndata <- NYTimes[sample(1:3100,size=1000,replace=FALSE),]\n```\n\n\n## Step 3: Create a DocumentTermMatrix\nUsing the create_matrix() function in RTextTools, we'll create a DocumentTermMatrix for use in the LDA() function from package topicmodels. Our text data consists of the Title and Subject columns of the NYTimes data. We will be removing numbers, stemming words, and weighting the DocumentTermMatrix by term frequency.\n\nweightTfIdf is NOT supported by LDA\n```{r}\nmatrix <- create_matrix(cbind(as.vector(data$Title),as.vector(data$Subject)), language=\"english\", removeNumbers=FALSE, stemWords=FALSE, removePunctuation=FALSE, weighting=weightTf)\n```\n\n\n## Step 4: Perform Latent Dirichlet Allocation (LDA)\nFirst we want to determine the number of topics in our data. In the case of the NYTimes dataset, the data have already been classified as a training set for supervised learning algorithms. Therefore, we can use the unique() function to determine the number of unique topic categories (k) in our data. Next, we use our matrix and this k value to generate the LDA model.\n\n```{r}\nk <- length(unique(data$Topic.Code))\nlda <- LDA(matrix, k)\n```\n\n\n\n## Step 5: View the Results\nLast, we can view the results by most likely term per topic, or most likely topic per document.\n\n```{r}\nterms(lda)\ntopics(lda)\n```",
+    "created" : 1404462948610.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "555734526",
+    "id" : "132CEF3",
+    "lastKnownWriteTime" : 1404465717,
+    "path" : "~/GitHub/My-DataMining/TextMining/LDA.Rmd",
+    "project_path" : "LDA.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}

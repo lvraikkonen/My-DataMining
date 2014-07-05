@@ -1,0 +1,49 @@
+LDA Topic Model
+========================================================
+
+## Step 1: Install RTextTools + topicmodels
+We begin by installing and loading RTextTools and the topicmodels package into our R workspace.
+
+```{r}
+## install.packages(c("RTextTools","topicmodels"))
+library(tm)
+library(RTextTools)
+library(topicmodels)
+```
+
+
+## Step 2: Load the Data
+In this example, we will be using the bundled NYTimes dataset compiled by Amber E. Boydstun. This dataset contains headlines from front-page NYTimes articles. We will take a random sample of 1000 articles for the purposes of this tutorial.
+
+```{r}
+data(NYTimes)
+data <- NYTimes[sample(1:3100,size=1000,replace=FALSE),]
+```
+
+
+## Step 3: Create a DocumentTermMatrix
+Using the create_matrix() function in RTextTools, we'll create a DocumentTermMatrix for use in the LDA() function from package topicmodels. Our text data consists of the Title and Subject columns of the NYTimes data. We will be removing numbers, stemming words, and weighting the DocumentTermMatrix by term frequency.
+
+weightTfIdf is NOT supported by LDA
+```{r}
+matrix <- create_matrix(cbind(as.vector(data$Title),as.vector(data$Subject)), language="english", removeNumbers=FALSE, stemWords=FALSE, removePunctuation=FALSE, weighting=weightTf)
+```
+
+
+## Step 4: Perform Latent Dirichlet Allocation (LDA)
+First we want to determine the number of topics in our data. In the case of the NYTimes dataset, the data have already been classified as a training set for supervised learning algorithms. Therefore, we can use the unique() function to determine the number of unique topic categories (k) in our data. Next, we use our matrix and this k value to generate the LDA model.
+
+```{r}
+k <- length(unique(data$Topic.Code))
+lda <- LDA(matrix, k)
+```
+
+
+
+## Step 5: View the Results
+Last, we can view the results by most likely term per topic, or most likely topic per document.
+
+```{r}
+terms(lda)
+topics(lda)
+```

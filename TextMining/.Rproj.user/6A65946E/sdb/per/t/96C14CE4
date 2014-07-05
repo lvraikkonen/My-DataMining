@@ -1,0 +1,17 @@
+{
+    "contents" : "连接Twitter账户简单分析Tweet\n========================================================\n\n## 相关包\n\n```{r packages}\n###install the necessary packages\n## install.packages(\"ROAuth\")\n## install.packages(\"twitteR\")\n## install.packages(\"wordcloud\")\n## install.packages(\"tm\")\n \nlibrary(\"ROAuth\")\nlibrary(\"twitteR\")\nlibrary(\"wordcloud\")\nlibrary(\"tm\")\n\n```\n\n## Connect via OAuth\nON windows, we need to dowload the certificate for OAUTH\n```{r}\n#Download SSL certification\ndownload.file(url=\"http://curl.haxx.se/ca/cacert.pem\", destfile=\"cacert.pem\")\n\n# Set SSL certs globally\noptions(RCurlOptions = list(cainfo = system.file(\"CurlSSL\", \"cacert.pem\", package = \"RCurl\")))\n\n#Set constant request URL\nrequestURL<-\"https://api.twitter.com/oauth/request_token\"\n#Set constant accessURL\naccessURL<-\"https://api.twitter.com/oauth/access_token\"\n#set constant authURL\nauthURL<-\"https://api.twitter.com/oauth/authorize\"\nconsumerKey<-\"an3hwBQXNU7xwZmz3ISTHHryI\"\nconsumerSecret<-\"I5pMQT5Hlh7G3zHhIBmmTC2f0AKCrJKBem69eTygwpfRu9hNBj\"\n\ntwitCred <- OAuthFactory$new(consumerKey=consumerKey,\n                             consumerSecret=consumerSecret,\n                             requestURL=requestURL,\n                             accessURL=accessURL,\n                             authURL=authURL)\n\n\n#asking for access\ntwitCred\ntwitCred$handshake(cainfo = system.file(\"CurlSSL\", \"cacert.pem\",package = \"RCurl\"))\n\n## To check and see if the handshake worked \nregisterTwitterOAuth(twitCred)\n\n##  save the handshake\nsave(list=\"twitCred\", file=\"twitteR_credentials\")\n```\n\n\nGet content and make word cloud\n```{r}\nworldCup <- searchTwitter(\"#WorldCup2014\", n=100, cainfo=\"cacert.pem\")\nworldCup_text <- sapply(worldCup, function(x) x$getText())\nworldCup_corpus<-Corpus(VectorSource(worldCup_text))\nworldCup_corpus<-tm_map(worldCup_corpus, tolower, mc.cores=1)\nworldCup_corpus<-tm_map(worldCup_corpus, removePunctuation, mc.cores=1)\nworldCup_corpus<-tm_map(worldCup_corpus, function(x) removeWords(x,stopwords()))\nwordcloud(worldCup_corpus)\n```\n\n",
+    "created" : 1404202257356.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3485769661",
+    "id" : "96C14CE4",
+    "lastKnownWriteTime" : 1404207265,
+    "path" : "~/GitHub/My-DataMining/TextMining/AccessTwitter.Rmd",
+    "project_path" : "AccessTwitter.Rmd",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : false,
+    "type" : "r_markdown"
+}

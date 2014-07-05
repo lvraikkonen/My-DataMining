@@ -140,7 +140,39 @@ result_all_corpus
 
 ## 词云
 ```{r}
-song.sweet.wordcloud <- wordcloud(corpus.dtm.tfidf)
+## song.sweet.wordcloud <- wordcloud(corpus.dtm.tfidf)
 ```
 
 
+## 5 特征提取
+
+
+采用随机森林算法选取前100个重要的词语，`subset`即是前100有重要分类信息的词语
+
+
+```{r}
+# 转为data frame
+corpus.df <- as.data.frame(inspect(corpus.dtm.tfidf),encoding="Unicode",stringsAsFactors=FALSE)
+
+
+## 随机森林算法选取前100个重要的词语
+label<-factor(c(rep("sad",764),c(rep("sweet",861))))
+weights.rf <- random.forest.importance(label~., corpus.df, 1)
+subset <- cutoff.k(weights.rf, 100)
+## 把提取的特征作为新的docment-term matrix
+feature.df <- as.DocumentTermMatrix(corpus.df[subset],weighting=weightTf)
+```
+让我们再次看看分类效果
+
+
+```{r}
+result_feature <- algorithm_summary(feature.df)
+result_feature
+```
+
+
+ 
+## 词云
+```{r}
+new_wordcolud <- wordcloud(feature.df)
+```

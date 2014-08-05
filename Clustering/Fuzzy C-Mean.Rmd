@@ -1,0 +1,6 @@
+---
+title: "Fuzzy C-Mean"
+author: "Claus Lv"
+date: "Tuesday, August 05, 2014"
+output: html_document
+---

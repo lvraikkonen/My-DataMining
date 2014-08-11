@@ -31,22 +31,22 @@ def computeNearestNeighbor(username, users):
     distances.sort()
     return distances
 
-##print computeNearestNeighbor("Hailey",users)
-
-# make recommend
-def recommend(username,users):
-    # first find nearest neighbor
-    nearest = computeNearestNeighbor(username, users)[0][1]
-    recommendations = []
-    # now find bands neighbor rated that user didn't
-    neighborRatings = users[nearest]
-    userRatings = users[username]
-    for artist in neighborRatings:
-        if not artist in userRatings:
-            recommendations.append((artist, neighborRatings[artist]))
-    # using the fn sorted for variety - sort is more efficient
-    return sorted(recommendations,
-                  key=lambda artistTuple: artistTuple[1],reverse = True)
-
-
-print recommend("Hailey",users)
+print computeNearestNeighbor("Hailey",users)
+##
+### make recommend
+##def recommend(username,users):
+##    # first find nearest neighbor
+##    nearest = computeNearestNeighbor(username, users)[0][1]
+##    recommendations = []
+##    # now find bands neighbor rated that user didn't
+##    neighborRatings = users[nearest]
+##    userRatings = users[username]
+##    for artist in neighborRatings:
+##        if not artist in userRatings:
+##            recommendations.append((artist, neighborRatings[artist]))
+##    # using the fn sorted for variety - sort is more efficient
+##    return sorted(recommendations,
+##                  key=lambda artistTuple: artistTuple[1],reverse = True)
+##
+##
+##print recommend("Hailey",users)

@@ -28,13 +28,14 @@ def minkowski(rating1, rating2, r):
         if key in rating2:
             distance += pow(abs(rating1[key] - rating2[key]), r)
             commonRating = True
-    if commonRating == True:
-        return pow(distance, 1/r)
+    if commonRating:
+        return pow(distance, float(1)/r)
     else:
         return 0 # no ratings in common
 
 #### expect value is 7.5
 ##print manhattan(users["Hailey"],users["Jordyn"])
+##print minkowski(users["Hailey"],users["Jordyn"],2)
 
 ## find cloest person, return sorted tuple
 def computeNearestNaighbor(username,users):
@@ -43,6 +44,7 @@ def computeNearestNaighbor(username,users):
         ## other people, calc distance
         if user != username:
             ##distance = manhattan(users[user], users[username])
+            ## r=2 Euler Distance
             distance = minkowski(users[user], users[username], 2)
             distances.append((distance, user))
     distances.sort()

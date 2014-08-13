@@ -1,4 +1,4 @@
-from math import sqrt
+import math
 
 ## user rate for some movies
 users = {"Angelica": {"Blues Traveler": 3.5, "Broken Bells": 2.0, "Norah Jones": 4.5, "Phoenix": 5.0,
@@ -74,6 +74,32 @@ def pearson(rating1,rating2):
         return (sum_xy - (sum_x * sum_y) / n) / denominator
 
 ##print pearson(users["Angelica"],users["Jordyn"])
+
+
+## Cosine similiarty Algorithm
+## (NOTE:) First make sure argus are two same length vector
+def cos_sim(rating1,rating2):
+    sum_xy = 0
+    sum_x2 = 0
+    sum_y2 = 0
+
+    for key in rating1:
+        x = rating1[key]
+        y = rating2[key]
+        sum_xy += x * y
+        sum_x2 += x ** 2
+        sum_y2 += y ** 2
+    print sum_xy,sum_x2,sum_y2
+
+    return sum_xy / math.sqrt(sum_x2 * sum_y2)
+
+users_test = {"Clara":{"Blues Traveler": 4.75, "Norah Jones": 4.5,
+                       "Phoenix":5, "The Strikes":4.25, "Weird AI":4},
+              "Robert":{"Blues Traveler": 4, "Norah Jones": 3, 
+                        "Phoenix":5, "The Strikes":2, "Weird AI":1}
+}
+
+#print cos_sim(users_test["Clara"],users_test["Robert"])
 
 
 ## find cloest person, return sorted tuple

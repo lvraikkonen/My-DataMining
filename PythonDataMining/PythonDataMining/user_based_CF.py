@@ -103,14 +103,20 @@ users_test = {"Clara":{"Blues Traveler": 4.75, "Norah Jones": 4.5,
 
 
 ## find cloest person, return sorted tuple
-def computeNearestNaighbor(username,users):
+def computeNearestNaighbor(method, username, users):
     distances = []
     for user in users:
         ## other people, calc distance
         if user != username:
-            ##distance = manhattan(users[user], users[username])
-            ## r=2 Euler Distance
-            distance = minkowski(users[user], users[username], 2)
+            if method == "distance":
+                # Distance Matric
+                distance = minkowski(users[user], users[username], 1)
+            elif method == "perason":
+                # Pearson
+                distance = pearson(users[user], users[username])
+            elif method == "cosine":
+                # Cosine Similiarty
+                distance = cos_sim(users[user], users[username])
             distances.append((distance, user))
     distances.sort()
     return distances
@@ -118,27 +124,27 @@ def computeNearestNaighbor(username,users):
 ##Expect Value
 ##[(2.0, ''Veronica'), (4.0, 'Chan'),(4.0, 'Sam'), (4.5, 'Dan'), (5.0,
 ##'Angelica'), (5.5, 'Bill'), (7.5, 'Jordyn')]
-##nearest_Hailey = computeNearestNaighbor("Hailey", users)
-##print nearest_Hailey
+#nearest_Hailey = computeNearestNaighbor("Hailey", users)
+#print nearest_Hailey
 
-##nearest_Hailey[0][1]
-##'Veronica'
+#nearest_Hailey[0][1]
+#'Veronica'
 
 ## recommand function
 def recommand(username, users):
-    ## nearest person
-    nearest = computeNearestNaighbor(username, users)[0][1]
+    ## nearest person name
+    nearest = computeNearestNaighbor("distance", username, users)[0][1]
 
     recommandations = []
     ## find bands neighbor rated that user didn't
     neighborRating = users[nearest]
     userRating = users[username]
-    for artist in neighborRating:
-        if artist not in userRating:
-            recommandations.append((artist, neighborRating[artist]))
+    for key in neighborRating:
+        if key not in userRating:
+            recommandations.append((key, neighborRating[key]))
     ## return recommand sorted by rating desc
     return sorted(recommandations,
                   key = lambda x: x[1],
                   reverse = True)
 
-##print recommand("Hailey",users)
+print recommand("Hailey",users)

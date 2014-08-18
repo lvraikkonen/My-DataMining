@@ -27,6 +27,11 @@ Some DataMining Case Study
 - `Slope One`算法
 
 ## R
+
+###协同过滤推荐
+基于物品的协同过滤推荐
+算法： 推荐结果 = 同现矩阵 * 评分矩阵
+
 ### Classification with R
 
 * Decision trees: rpart, party

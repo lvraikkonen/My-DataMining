@@ -39,6 +39,7 @@ Some DataMining Case Study
 * SVM: e1071, kernlab
 * Neural networks: nnet, neuralnet, RSNNS
 * Performance evaluation: ROCR
+* Naive Bayes Classifier 朴素贝叶斯分类
 
 ### Clustering with R
 * k-means: kmeans(), kmeansruns()9

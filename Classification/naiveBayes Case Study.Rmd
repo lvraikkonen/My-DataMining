@@ -1,0 +1,38 @@
+---
+title: "naiveBayes Case Study"
+author: "Claus Lv"
+date: "Thursday, September 18, 2014"
+output: html_document
+---
+
+## Naïve Bayes
+
+
+## Available packages on CRAN
+`e1071` and `klaR`
+
+```{r load library}
+library(e1071)
+```
+
+## Iris Data Set
+The Iris dataset contains 150 instances, corresponding to three equally-frequent species of iris plant (Iris setosa, Iris versicolour, and Iris virginica). An Iris versicolor is shown below, courtesy of Wikimedia Commons.
+
+```{r Iris data set summary}
+summary(iris)
+pairs(iris[1:4], main = "Iris Data (red=setosa,green=versicolor,blue=virginica)",
+      pch = 21,
+      bg = c("red", "green3", "blue")[unclass(iris$Species)])
+```
+
+## Classify use naive Bayes
+```{r analysis}
+## column from 1 to 4 is the attributes, col 5 is the class
+classifier <- naiveBayes(iris[ ,1:4], iris[,5])
+## result
+table(predict(classifier, iris[,-5]), iris[,5])
+```
+
+This simple case study shows that a Naïve Bayes classifier makes few mistakes in a dataset that, although simple, is not linearly separable, as shown in the scatterplots and by a look at the confusion matrix, where all misclassifications are between Iris Versicolor and Iris Virginica instances.
+
+## Note
